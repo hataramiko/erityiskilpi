@@ -1,81 +1,89 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class CharacterManager : MonoBehaviour
 {
-    //public bool disposable;
-    public bool isLetter;
-    public bool isFirstDigit;
+    public bool isFirstLetter; // Is the only disposable letter.
+    public bool isFirstDigit;  // Cannot be 0 or disposed of.
+    public GameObject[] characters;
 
+    private bool disposable = true;
+
+    private int value;
     private int minValue;
     private int maxValue;
-    private int characterValue;
-    private char charToDisplay;
+
     
     // Start is called before the first frame update
     void Start()
     {
-        if(isLetter == true)
+        Config();
+        DisplayCharacter();
+    }
+
+    public void IncreaseValue()
+    {
+        value++;
+
+        if(value >= maxValue)
         {
-            maxValue = 28;
-        }
-        else
-        {
-            maxValue = 9;
+            value = minValue;
         }
 
+        DisplayCharacter();
+    }
+
+    public void DecreaseValue()
+    {
+        value--;
+
+        if(value < minValue)
+        {
+            value = maxValue - 1;
+        }
+
+        DisplayCharacter();
+    }
+
+    public void DisplayCharacter()
+    {
+        //Debug.Log("This is being displayed: " + value);
+
+        for(int i = 0; i < characters.Length; i++)
+        {
+            characters[i].SetActive(false);
+        }
+
+        characters[value].SetActive(true);
+    }
+
+    public void Config()
+    {
         if(isFirstDigit == true)
         {
             minValue = 1;
+
+            disposable = false;
         }
         else
         {
             minValue = 0;
         }
 
-        characterValue = minValue;
+        value = minValue;
 
-        Debug.Log("Start value: " + characterValue);
-    }
+        maxValue = characters.Length;
 
-    public void increaseValue()
-    {
-        characterValue++;
-
-        if(characterValue > maxValue)
+        if(isFirstLetter == false)
         {
-            characterValue = minValue;
+            disposable = false;
         }
-
-        Debug.Log("Value increased: " + characterValue);
     }
 
-    public void decreaseValue()
+    public void Dispose()
     {
-        characterValue--;
-
-        if(characterValue < minValue)
-        {
-            characterValue = maxValue;
-        }
-
-        Debug.Log("Value decreased: " + characterValue);
-    }
-
-    public void displayValue()
-    {
-        /* 
-        koodin pätkä joka muuttaa int arvon joko muotoon char tai string,
-        tämä tekstiarvo sitten TMPro sylkee näkyvään muotoon.
-        */
-    }
-
-    // Ideana että muuttaa numeroarvon kirjaimeksi
-    public void digitToLetter()
-    {
-        Debug.Log("This is a letter.");
+        Debug.Log("In the bin.");
     }
 
     // Update is called once per frame
@@ -83,36 +91,4 @@ public class CharacterManager : MonoBehaviour
     {
         
     }
-
-    /*
-        0  = A
-        1  = B
-        2  = C
-        3  = D
-        4  = E
-        5  = F
-        6  = G
-        7  = H
-        8  = I
-        9  = J
-        10 = K
-        11 = L
-        12 = M
-        13 = N
-        14 = O
-        15 = P
-        16 = Q
-        17 = R
-        18 = S
-        19 = T
-        20 = U
-        21 = V
-        22 = W
-        23 = X
-        24 = Y
-        25 = Z
-        26 = Å
-        27 = Ä
-        28 = Ö
-    */
 }
