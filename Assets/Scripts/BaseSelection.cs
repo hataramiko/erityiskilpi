@@ -9,15 +9,13 @@ public class BaseSelection : MonoBehaviour
 
     private int active;
 
-    private bool isEuro;
-    private bool isTall;
-    private bool isLong;
-    private bool isShort;
-    private bool isSmall;
-    private bool isBlack;
-    private bool canFitSix;
-
-    private Color textColor;
+    public bool isEuro;
+    public bool isTall;
+    public bool isLong;
+    public bool isShort;
+    public bool isSmall;
+    public bool isBlack;
+    public bool canFitSix;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +32,7 @@ public class BaseSelection : MonoBehaviour
             bases[i].SetActive(false);
         }
 
-        CheckBaseProperties();
+        SetBaseProperties();
 
         bases[active].SetActive(true);
     }
@@ -46,7 +44,7 @@ public class BaseSelection : MonoBehaviour
         Display();
     }
 
-    public void CheckBaseProperties()
+    public void SetBaseProperties()
     {
         // Checks if base has Euroband
         if(active <= 1)
@@ -117,19 +115,6 @@ public class BaseSelection : MonoBehaviour
         {
             canFitSix = false;
         }
-
-        /*
-        if(isBlack == true)
-        {
-            textColor = Color.white;
-            Debug.Log(textColor);
-        }
-        else
-        {
-            textColor = Color.black;
-            Debug.Log(textColor);
-        }
-        */
 
         /*
         Debug.Log("Base has Euroband: " + isEuro);
