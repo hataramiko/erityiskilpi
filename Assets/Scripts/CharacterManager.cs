@@ -8,7 +8,7 @@ public class CharacterManager : MonoBehaviour
     public bool isFirstDigit;  // Cannot be 0 or disposed of.
     public GameObject[] characters;
 
-    private bool disposable = true;
+    //private bool disposable = true;
 
     private int value;
     private int minValue;
@@ -18,7 +18,7 @@ public class CharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Config();
+        Initialize();
         DisplayCharacter();
     }
 
@@ -58,13 +58,13 @@ public class CharacterManager : MonoBehaviour
         characters[value].SetActive(true);
     }
 
-    public void Config()
+    public void Initialize()
     {
         if(isFirstDigit == true)
         {
             minValue = 1;
 
-            disposable = false;
+            //disposable = false;
         }
         else
         {
@@ -75,10 +75,12 @@ public class CharacterManager : MonoBehaviour
 
         maxValue = characters.Length;
 
+        /*
         if(isFirstLetter == false)
         {
             disposable = false;
         }
+        */
     }
 
     public void Dispose()
