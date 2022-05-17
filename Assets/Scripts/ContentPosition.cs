@@ -5,7 +5,9 @@ using UnityEngine;
 public class ContentPosition : MonoBehaviour
 {
     RectTransform rectTransform;
+    private bool flip;
 
+    [Header("Components")]
     public BaseSelection _base;
     public GameObject lettersParent;
     public GameObject letterA;
@@ -17,14 +19,16 @@ public class ContentPosition : MonoBehaviour
     public GameObject digit3;
     public GameObject hyphen;
 
+    [Header("Standard Bases")]
     public Vector2 defaultPosition;
     public Vector3 defaultScale;
     public Vector2 euroOffset;
-    private bool offset;
     public Vector3 smallScale;
     public Vector2 positionRight1;
     public Vector2 positionRight2;
     public Vector2 positionLeft1;
+
+    [Header("Tall Bases")]
     public Vector2 lettersDefaultPos;
     public Vector2 digitsDefaultPos;
     public Vector2 lettersPosition0;
@@ -67,8 +71,14 @@ public class ContentPosition : MonoBehaviour
 
         if(_base.isShort == true && letterA.activeSelf == true && digit3.activeSelf == true)
         {
-            //letterA.SetActive(false);
             digit3.SetActive(false);
+
+            if(digit3.activeSelf != true && flip == true)
+            {
+                letterA.SetActive(false);
+                digit3.SetActive(true);
+                flip = false;
+            }
         }
 
         if(letterA.activeSelf == false && digit2.activeSelf != true) // BC-1
@@ -99,6 +109,8 @@ public class ContentPosition : MonoBehaviour
         if(_base.isSmall == true)
         {
             rectTransform.localScale = smallScale;
+
+            position = position * smallScale;
         }
         else
         {
@@ -107,12 +119,7 @@ public class ContentPosition : MonoBehaviour
 
         if(_base.isEuro == true && _base.isTall != true)
         {
-            Vector2 offsetPosition = position;
-
-            offsetPosition.x = euroOffset.x;
-            offsetPosition.y = euroOffset.y;
-
-            position = offsetPosition;
+            position = position + euroOffset;
         }
 
         rectTransform.localPosition = position;
@@ -143,7 +150,10 @@ public class ContentPosition : MonoBehaviour
         }
     }
 
-    
+    public void SwitchEnds()
+    {
+        flip = true;
+    }
 
     // Update is called once per frame
     void Update()
