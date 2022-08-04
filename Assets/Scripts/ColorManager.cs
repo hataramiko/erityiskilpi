@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ColorManager : MonoBehaviour
 {
-    public BaseSelection _base;
+    public PlateManager plate;
 
     private Color activeColor;
     
@@ -15,9 +15,16 @@ public class ColorManager : MonoBehaviour
         SetColor();
     }
 
+    public void SetColor()
+    {
+        CheckBaseColor();
+
+        GetComponent<Image>().color = activeColor;
+    }
+
     public void CheckBaseColor()
     {
-        if(_base.isBlack == true)
+        if(plate.isBlack == true)
         {
             activeColor = Color.white;
         }
@@ -25,13 +32,6 @@ public class ColorManager : MonoBehaviour
         {
             activeColor = Color.black;
         }
-    }
-
-    public void SetColor()
-    {
-        CheckBaseColor();
-
-        GetComponent<Image>().color = activeColor;
     }
 
     // Update is called once per frame

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    public bool isFirstLetter; // Is the only disposable letter.
+    //public bool isFirstLetter; // Is the only disposable letter.
     public bool isFirstDigit;  // Cannot be 0 or disposed of.
     public GameObject[] characters;
 
