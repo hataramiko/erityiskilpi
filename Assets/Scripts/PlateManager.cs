@@ -267,6 +267,19 @@ public class PlateManager : MonoBehaviour
         DisplayBase();
     }
 
+    public void BaseArrayIncrease()
+    {
+        activeBase++;
+
+        if(activeBase >= bases.Length)
+        {
+            activeBase = 0;
+        }
+
+        Debug.Log("Current value in 'bases' array: " + activeBase);
+        DisplayBase();
+    }
+
     public void SwitchEnds()
     {
         flip = true;

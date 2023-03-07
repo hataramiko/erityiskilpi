@@ -1,0 +1,28 @@
+.navBarButton {
+    flex-basis: 20%;
+    flex-shrink: 1;
+    flex-grow: 1;
+    display: flex;
+    visibility: visible;
+    overflow: visible;
+    font-size: 100%;
+    color: rgba(255, 255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    align-items: center;
+}
