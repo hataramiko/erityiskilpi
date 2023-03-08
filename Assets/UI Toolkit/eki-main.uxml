@@ -41,7 +41,6 @@
                 <ui:Button text="LISÄÄ / POISTA" display-tooltip-when-elided="true" name="ButtonArrayCount" class="navBarButton" />
                 <ui:Button text="POHJAT" display-tooltip-when-elided="true" name="ButtonBaseSelect" class="navBarButton" />
             </ui:VisualElement>
-            <ui:Button text="Debug" display-tooltip-when-elided="true" name="DebugButton" style="flex-basis: 10%; display: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

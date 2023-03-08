@@ -8,7 +8,7 @@ public class CharacterManager : MonoBehaviour
     public bool isFirstDigit;  // Cannot be 0 or disposed of.
     public GameObject[] characters;
 
-    //private bool disposable = true;
+    //public bool disposable;
 
     private int value;
     private int minValue;

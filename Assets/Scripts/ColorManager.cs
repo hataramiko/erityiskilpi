@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*
+    Changes color of characters according to the color of active base.
+*/
 public class ColorManager : MonoBehaviour
 {
     public PlateManager plate;

@@ -276,7 +276,7 @@ public class PlateManager : MonoBehaviour
             activeBase = 0;
         }
 
-        Debug.Log("Current value in 'bases' array: " + activeBase);
+        //Debug.Log("Current value in 'bases' array: " + activeBase);
         DisplayBase();
     }
 
