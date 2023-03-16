@@ -17,20 +17,20 @@ public class UIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start() // private void OnEnable???
     {
-        activeMode = defaultMode;
-        SetMode();
+        //activeMode = defaultMode;
+        //SetMode();
 
         var root = GetComponent<UIDocument>().rootVisualElement; // var == VisualElement???
 
         //baseSelectButton = root.Q<Button>("ButtonBaseSelect");
 
-        Button arrayValue = root.Q<Button>("ButtonArrayValue");
-        Button addRemove = root.Q<Button>("ButtonArrayCount");
-        Button baseSelect = root.Q<Button>("ButtonBaseSelect");
+        Button navBarFirst = root.Q<Button>("NavBarButton1");
+        Button navBarSecond = root.Q<Button>("NavBarButton2");
+        //Button navBarThird = root.Q<Button>("NavBarButton3");
 
-        arrayValue.clicked += () => ArrayValueClick();
-        addRemove.clicked += () => AddRemoveClick();
-        baseSelect.clicked += () => BaseSelectClick();
+        navBarFirst.clicked += () => EnterEditMode();
+        navBarSecond.clicked += () => EnterBaseSelect();
+        //navBarThird.clicked += () => BaseSelectClick();
     }
 
     public void SetMode()
@@ -50,6 +50,18 @@ public class UIHandler : MonoBehaviour
         }
 
         Debug.Log("Current mode: " + activeMode);
+    }
+
+    public void EnterEditMode()
+    {
+        Debug.Log("Merkit ylös/alas tilattu'd");
+    }
+
+    public void EnterBaseSelect()
+    {
+        Debug.Log("Nyt vaihtuu pohja");
+
+        plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
     }
 
     public void ArrayValueClick()

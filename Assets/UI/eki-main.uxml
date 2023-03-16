@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/eki.uss?fileID=7433441132597879392&amp;guid=9e95c15db30d64b4d86a01a271faf9d9&amp;type=3#eki" />
+    <Style src="project://database/Assets/UI/eki.uss?fileID=7433441132597879392&amp;guid=9e95c15db30d64b4d86a01a271faf9d9&amp;type=3#eki" />
     <ui:VisualElement name="RootContainer" style="flex-grow: 1; align-items: stretch; justify-content: space-between;">
         <ui:VisualElement name="ContainerTop" style="flex-basis: 33.3%; flex-grow: 1; flex-shrink: 1; align-items: flex-start;">
             <ui:Button text="HAMBURGER" display-tooltip-when-elided="true" style="display: flex; width: 64px; height: 64px; margin-left: 3%; margin-right: 3%; margin-top: 3%; margin-bottom: 3%; background-color: rgb(255, 255, 255); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 100%; border-bottom-left-radius: 100%; border-top-right-radius: 100%; border-bottom-right-radius: 100%;" />
@@ -37,9 +37,9 @@
         </ui:VisualElement>
         <ui:VisualElement name="ContainerBot" style="flex-direction: column-reverse; justify-content: flex-start; flex-basis: 33.3%; flex-grow: 1; flex-shrink: 1;">
             <ui:VisualElement name="NavigationBar" style="background-color: rgb(0, 0, 0); flex-direction: row; flex-wrap: nowrap; align-items: stretch; justify-content: space-around; border-left-color: rgb(64, 64, 64); border-right-color: rgb(64, 64, 64); border-top-color: rgb(64, 64, 64); border-bottom-color: rgb(64, 64, 64); border-bottom-width: 2px; border-top-width: 2px; flex-basis: 20%; flex-shrink: 0; flex-grow: 0;">
-                <ui:Button text="YLÖS / ALAS" display-tooltip-when-elided="true" name="ButtonArrayValue" class="navBarButton" />
-                <ui:Button text="LISÄÄ / POISTA" display-tooltip-when-elided="true" name="ButtonArrayCount" class="navBarButton" />
-                <ui:Button text="POHJAT" display-tooltip-when-elided="true" name="ButtonBaseSelect" class="navBarButton" />
+                <ui:Button text="MERKIT" display-tooltip-when-elided="true" name="NavBarButton1" class="navBarButton" />
+                <ui:Button text="POHJAT" display-tooltip-when-elided="true" name="NavBarButton2" class="navBarButton" />
+                <ui:Button text="POHJAT" display-tooltip-when-elided="true" name="NavBarButton3" class="navBarButton" style="display: none;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
