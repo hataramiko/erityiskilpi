@@ -81,16 +81,54 @@ public class UIManager : MonoBehaviour
         digit2Enable.clicked += () => EnableDigit2();
         digit3Disable.clicked += () => DisableDigit3();
         digit3Enable.clicked += () =>  EnableDigit3();
+
+        // Vihree nappi piiloon alussa testing testing
+        letterAEnable.style.display = DisplayStyle.None;
     }
 
     public void DisableLetterA()
     {
         plate.letterA.SetActive(false);
+
+        // Copied from start for testing
+        var root = GetComponent<UIDocument>().rootVisualElement;
+
+        Button letterAIncrease = root.Q<Button>("chars-letter1__up");
+        Button letterADecrease = root.Q<Button>("chars-letter1__down");
+
+        Button letterADisable= root.Q<Button>("chars-letter1__remove");
+        Button letterAEnable = root.Q<Button>("chars-letter1__add");
+
+        // Save this for later
+        letterAIncrease.SetEnabled(false);
+        letterADecrease.SetEnabled(false);
+        // Ehkä tääki
+        letterAEnable.style.display = DisplayStyle.Flex;
+        // Mut tuskin tätä
+        letterADisable.style.display = DisplayStyle.None;
     }
 
     public void EnableLetterA()
     {
         plate.letterA.SetActive(true);
+
+        // Copied from start for testing
+        var root = GetComponent<UIDocument>().rootVisualElement;
+
+        Button letterAIncrease = root.Q<Button>("chars-letter1__up");
+        Button letterADecrease = root.Q<Button>("chars-letter1__down");
+
+        Button letterADisable= root.Q<Button>("chars-letter1__remove");
+        Button letterAEnable = root.Q<Button>("chars-letter1__add");
+
+
+        // Save this for later
+        letterAIncrease.SetEnabled(true);
+        letterADecrease.SetEnabled(true);
+        // 
+        letterAEnable.style.display = DisplayStyle.None;
+        // 
+        letterADisable.style.display = DisplayStyle.Flex;
     }
 
     public void DisableDigit2()
