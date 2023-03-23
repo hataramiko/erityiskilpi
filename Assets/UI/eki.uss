@@ -70,7 +70,12 @@
     border-right-width: 10px;
     border-top-width: 10px;
     border-bottom-width: 10px;
-    color: rgba(154, 0, 0, 255);
+    color: rgb(154, 0, 0);
+    left: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .chars__button-count--add {
@@ -83,5 +88,10 @@
     border-right-color: rgba(82, 204, 82, 0.9);
     border-top-color: rgba(82, 204, 82, 0.9);
     border-bottom-color: rgba(82, 204, 82, 0.9);
-    color: rgba(0, 152, 0, 255);
+    color: rgb(0, 152, 0);
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 }

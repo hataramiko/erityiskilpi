@@ -24,6 +24,32 @@ public class UIManager : MonoBehaviour
     //int defaultMode = 0;
     int activeMode;
 
+    // UI Buttons
+    Button navBarFirst;
+    Button navBarSecond;
+    Button navBarThird;
+
+    Button letterAIncrease;
+    Button letterADecrease;
+    Button letterBIncrease;
+    Button letterBDecrease;
+    Button letterCIncrease;
+    Button letterCDecrease;
+    Button digit1Increase;
+    Button digit1Decrease;
+    Button digit2Increase;
+    Button digit2Decrease;
+    Button digit3Increase;
+    Button digit3Decrease;
+
+    Button letterADisable;
+    Button letterAEnable;
+    Button digit2Disable;
+    Button digit2Enable;
+    Button digit3Disable;
+    Button digit3Enable;
+
+
     // Start is called before the first frame update
     void Start() // private void OnEnable???
     {
@@ -34,29 +60,29 @@ public class UIManager : MonoBehaviour
 
         //baseSelectButton = root.Q<Button>("ButtonBaseSelect");
 
-        Button navBarFirst = root.Q<Button>("nav-bar-button1");
-        Button navBarSecond = root.Q<Button>("nav-bar-button2");
+        navBarFirst = root.Q<Button>("nav-bar-button1");
+        navBarSecond = root.Q<Button>("nav-bar-button2");
         //Button navBarThird = root.Q<Button>("nav-bar-button3");
 
-        Button letterAIncrease = root.Q<Button>("chars-letter1__up");
-        Button letterADecrease = root.Q<Button>("chars-letter1__down");
-        Button letterBIncrease = root.Q<Button>("chars-letter2__up");
-        Button letterBDecrease = root.Q<Button>("chars-letter2__down");
-        Button letterCIncrease = root.Q<Button>("chars-letter3__up");
-        Button letterCDecrease = root.Q<Button>("chars-letter3__down");
-        Button digit1Increase = root.Q<Button>("chars-digit1__up");
-        Button digit1Decrease = root.Q<Button>("chars-digit1__down");
-        Button digit2Increase = root.Q<Button>("chars-digit2__up");
-        Button digit2Decrease = root.Q<Button>("chars-digit2__down");
-        Button digit3Increase = root.Q<Button>("chars-digit3__up");
-        Button digit3Decrease = root.Q<Button>("chars-digit3__down");
+        letterAIncrease = root.Q<Button>("chars-letter1__up");
+        letterADecrease = root.Q<Button>("chars-letter1__down");
+        letterBIncrease = root.Q<Button>("chars-letter2__up");
+        letterBDecrease = root.Q<Button>("chars-letter2__down");
+        letterCIncrease = root.Q<Button>("chars-letter3__up");
+        letterCDecrease = root.Q<Button>("chars-letter3__down");
+        digit1Increase = root.Q<Button>("chars-digit1__up");
+        digit1Decrease = root.Q<Button>("chars-digit1__down");
+        digit2Increase = root.Q<Button>("chars-digit2__up");
+        digit2Decrease = root.Q<Button>("chars-digit2__down");
+        digit3Increase = root.Q<Button>("chars-digit3__up");
+        digit3Decrease = root.Q<Button>("chars-digit3__down");
 
-        Button letterADisable= root.Q<Button>("chars-letter1__remove");
-        Button letterAEnable = root.Q<Button>("chars-letter1__add");
-        Button digit2Disable= root.Q<Button>("chars-digit2__remove");
-        Button digit2Enable = root.Q<Button>("chars-digit2__add");
-        Button digit3Disable= root.Q<Button>("chars-digit3__remove");
-        Button digit3Enable = root.Q<Button>("chars-digit3__add");
+        letterADisable = root.Q<Button>("chars-letter1__remove");
+        letterAEnable = root.Q<Button>("chars-letter1__add");
+        digit2Disable = root.Q<Button>("chars-digit2__remove");
+        digit2Enable = root.Q<Button>("chars-digit2__add");
+        digit3Disable = root.Q<Button>("chars-digit3__remove");
+        digit3Enable = root.Q<Button>("chars-digit3__add");
 
         navBarFirst.clicked += () => EnterEditMode();
         navBarSecond.clicked += () => EnterBaseSelect();
@@ -84,71 +110,94 @@ public class UIManager : MonoBehaviour
 
         // Vihree nappi piiloon alussa testing testing
         letterAEnable.style.display = DisplayStyle.None;
+        digit3Enable.style.display = DisplayStyle.None;
+        digit2Enable.style.display = DisplayStyle.None;
+        // ja punanen
+        digit2Disable.style.display = DisplayStyle.None;
     }
 
     public void DisableLetterA()
     {
         plate.letterA.SetActive(false);
 
-        // Copied from start for testing
-        var root = GetComponent<UIDocument>().rootVisualElement;
-
-        Button letterAIncrease = root.Q<Button>("chars-letter1__up");
-        Button letterADecrease = root.Q<Button>("chars-letter1__down");
-
-        Button letterADisable= root.Q<Button>("chars-letter1__remove");
-        Button letterAEnable = root.Q<Button>("chars-letter1__add");
-
-        // Save this for later
+        // Sets up/down buttons un-interactable
         letterAIncrease.SetEnabled(false);
         letterADecrease.SetEnabled(false);
-        // Ehkä tääki
-        letterAEnable.style.display = DisplayStyle.Flex;
-        // Mut tuskin tätä
-        letterADisable.style.display = DisplayStyle.None;
+
+        letterAEnable.style.display = DisplayStyle.Flex; // Displays the green Enable button
+        letterADisable.style.display = DisplayStyle.None; // Hides the red Disable button
     }
 
     public void EnableLetterA()
     {
         plate.letterA.SetActive(true);
 
-        // Copied from start for testing
-        var root = GetComponent<UIDocument>().rootVisualElement;
-
-        Button letterAIncrease = root.Q<Button>("chars-letter1__up");
-        Button letterADecrease = root.Q<Button>("chars-letter1__down");
-
-        Button letterADisable= root.Q<Button>("chars-letter1__remove");
-        Button letterAEnable = root.Q<Button>("chars-letter1__add");
-
-
-        // Save this for later
+        // Recovers interaction in up/down buttons
         letterAIncrease.SetEnabled(true);
         letterADecrease.SetEnabled(true);
-        // 
-        letterAEnable.style.display = DisplayStyle.None;
-        // 
-        letterADisable.style.display = DisplayStyle.Flex;
+
+        letterADisable.style.display = DisplayStyle.Flex; // Displays the red Disable button
+        letterAEnable.style.display = DisplayStyle.None; // Hides the green Enable button
     }
 
     public void DisableDigit2()
     {
         plate.digit2.SetActive(false);
+
+        // Sets up/down buttons un-interactable
+        digit2Increase.SetEnabled(false);
+        digit2Decrease.SetEnabled(false);
+
+        digit2Enable.style.display = DisplayStyle.Flex; // Displays the green Enable button
+        digit2Disable.style.display = DisplayStyle.None; // Hides the red Disable button
+
+        // Hides the green Enable button for the third digit
+        digit3Enable.style.display = DisplayStyle.None;
     }
 
     public void EnableDigit2()
     {
         plate.digit2.SetActive(true);
+
+        // Recovers interaction in up/down buttons
+        digit2Increase.SetEnabled(true);
+        digit2Decrease.SetEnabled(true);
+
+        digit2Disable.style.display = DisplayStyle.Flex; // Displays the red Disable button
+        digit2Enable.style.display = DisplayStyle.None; // Hides the green Enable button
+
+        // Displays the green Enable button for the third digit
+        digit3Enable.style.display = DisplayStyle.Flex;
     }
 
     public void DisableDigit3()
     {
         plate.digit3.SetActive(false);
+
+        // Sets up/down buttons un-interactable
+        digit3Increase.SetEnabled(false);
+        digit3Decrease.SetEnabled(false);
+
+        digit3Enable.style.display = DisplayStyle.Flex; // Displays the green Enable button
+        digit3Disable.style.display = DisplayStyle.None; // Hides the red Disable button
+
+        // Displays the green Enable button for the second digit
+        digit2Disable.style.display = DisplayStyle.Flex;
     }
 
     public void EnableDigit3()
     {
         plate.digit3.SetActive(true);
+
+        // Recovers interaction in up/down buttons
+        digit3Increase.SetEnabled(true);
+        digit3Decrease.SetEnabled(true);
+
+        digit3Disable.style.display = DisplayStyle.Flex; // Displays the red Disable button
+        digit3Enable.style.display = DisplayStyle.None; // Hides the green Enable button
+
+        // Hides the red Disable button for the second digit
+        digit2Disable.style.display = DisplayStyle.None;
     }
 
     public void SetMode()
