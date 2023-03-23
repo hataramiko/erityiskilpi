@@ -6,11 +6,6 @@ public class PlateManager : MonoBehaviour
 {
     [Header("Preferences")]
     public int defaultBase;
-    /*
-    public bool notUsingA;
-    public bool notUsing2;
-    public bool notUsing3;
-    */
 
     [Space(10)]
     public GameObject[] bases;
@@ -212,7 +207,7 @@ public class PlateManager : MonoBehaviour
             position = defaultPosition;
         }
 
-        // 
+        // Checks if Base is small and applies scale accordingly
         if(isSmall == true)
         {
             contents.GetComponent<RectTransform>().localScale = smallScale;
@@ -224,7 +219,7 @@ public class PlateManager : MonoBehaviour
             contents.GetComponent<RectTransform>().localScale = defaultScale;
         }
 
-        // Adds offset to position if Base is 
+        // Adds offset to position if Base is standard Euro
         if(isEuro == true && isTall != true)
         {
             position = position + euroOffset;
@@ -278,6 +273,11 @@ public class PlateManager : MonoBehaviour
 
         //Debug.Log("Current value in 'bases' array: " + activeBase);
         DisplayBase();
+    }
+
+    public void ChangeArrayValue()
+    {
+
     }
 
     public void SwitchEnds()

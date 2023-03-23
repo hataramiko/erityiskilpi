@@ -11292,6 +11292,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plate: {fileID: 478023590}
+  letterA: {fileID: 649371903}
+  letterB: {fileID: 1617879325}
+  letterC: {fileID: 1233994915}
+  digit1: {fileID: 1944031191}
+  digit2: {fileID: 2009140421}
+  digit3: {fileID: 1599429838}
   modes:
   - {fileID: 1795574477}
   - {fileID: 2065772844}
@@ -11562,7 +11568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1627997140
 RectTransform:
   m_ObjectHideFlags: 0
