@@ -8,7 +8,7 @@ public class ContentPosition : MonoBehaviour
     private bool flip;
 
     [Header("Components")]
-    public BaseSelection _base;
+    public BaseSelectionOld _base;
     public GameObject lettersParent;
     public GameObject letterA;
     public GameObject letterB;

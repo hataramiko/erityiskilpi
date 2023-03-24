@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseSelection : MonoBehaviour
+public class BaseSelectionOld : MonoBehaviour
 {
     public int defaultBase;
     public GameObject[] bases;
