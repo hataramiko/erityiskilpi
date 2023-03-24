@@ -112,8 +112,11 @@ public class UIManager : MonoBehaviour
         letterAEnable.style.display = DisplayStyle.None;
         digit3Enable.style.display = DisplayStyle.None;
         digit2Enable.style.display = DisplayStyle.None;
-        // ja punanen
+        // ja punanen (digit2)
         digit2Disable.style.display = DisplayStyle.None;
+        // ja loput punaset
+        letterADisable.style.display = DisplayStyle.None;
+        digit3Disable.style.display = DisplayStyle.None;
     }
 
     public void DisableLetterA()
