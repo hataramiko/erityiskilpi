@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 /*
     Handles UI Toolkit based UI interactions
 */
+[RequireComponent(typeof(UIDocument))]
 public class UIManager : MonoBehaviour
 {
     public PlateManager plate;
@@ -21,8 +22,18 @@ public class UIManager : MonoBehaviour
     [Space(15)]
     public GameObject[] modes;
 
-    //int defaultMode = 0;
+    //
+    [SerializeField] NavigationBar NavBar;
+
+    UIDocument m_UIDocument;
+    public UIDocument UIDocument => m_UIDocument;
+    //
+
+    const int defaultMode = 0;
     int activeMode;
+    const int editModeValue = 1;
+    const int editModeCount = 2;
+    int activeEditMode;
 
     // UI Buttons
     Button navBarFirst;
@@ -49,6 +60,10 @@ public class UIManager : MonoBehaviour
     Button digit3Disable;
     Button digit3Enable;
 
+    void OnEnable()
+    {
+        m_UIDocument = GetComponent<UIDocument>();
+    }
 
     // Start is called before the first frame update
     void Start() // private void OnEnable???
@@ -117,7 +132,75 @@ public class UIManager : MonoBehaviour
         // ja loput punaset
         letterADisable.style.display = DisplayStyle.None;
         digit3Disable.style.display = DisplayStyle.None;
+
+        Initialize();
     }
+
+    public void Initialize()
+    {
+        activeEditMode = 1;
+    }
+
+    public void SwitchEditMode()
+    {
+        if(activeEditMode == 2)
+        {
+            EnterCharCountMode();
+        }
+        else
+        {
+            ExitCharCountMode();
+        }
+    }
+
+    public void EnterCharCountMode()
+    {
+        /*
+        letterAEnable.style.display = DisplayStyle.None;
+        digit3Enable.style.display = DisplayStyle.None;
+        digit2Enable.style.display = DisplayStyle.None;
+
+        digit2Disable.style.display = DisplayStyle.None;
+        letterADisable.style.display = DisplayStyle.None;
+        digit3Disable.style.display = DisplayStyle.None;
+
+        letterAEnable.style.display = DisplayStyle.Flex;
+        digit3Enable.style.display = DisplayStyle.Flex;
+        digit2Enable.style.display = DisplayStyle.Flex;
+
+        digit2Disable.style.display = DisplayStyle.Flex;
+        letterADisable.style.display = DisplayStyle.Flex;
+        digit3Disable.style.display = DisplayStyle.Flex;
+        */
+
+        if(plate.letterA == true)
+        {
+            letterADisable.style.display = DisplayStyle.Flex;
+            //plate.letterA.SetActive(false);
+        }
+
+        if(plate.digit3 == true)
+        {
+            digit3Disable.style.display = DisplayStyle.Flex;
+        }
+
+        if(plate.digit2 == true && plate.digit3 != true)
+        {
+            digit2Disable.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    public void ExitCharCountMode()
+    {
+        letterAEnable.style.display = DisplayStyle.None;
+        digit3Enable.style.display = DisplayStyle.None;
+        digit2Enable.style.display = DisplayStyle.None;
+
+        digit2Disable.style.display = DisplayStyle.None;
+        letterADisable.style.display = DisplayStyle.None;
+        digit3Disable.style.display = DisplayStyle.None;
+    }
+
 
     public void DisableLetterA()
     {
@@ -225,6 +308,21 @@ public class UIManager : MonoBehaviour
     public void EnterEditMode()
     {
         Debug.Log("MERKIT");
+
+        if(activeEditMode == defaultMode)
+        {
+            activeEditMode = editModeValue;
+        }
+        else if(activeEditMode == editModeValue)
+        {
+            activeEditMode = editModeCount;
+        }
+        else if(activeEditMode == editModeCount)
+        {
+            activeEditMode = editModeValue;
+        }
+
+        SwitchEditMode();
     }
 
     public void EnterBaseSelect()
@@ -255,4 +353,14 @@ public class UIManager : MonoBehaviour
         SetMode();
         plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
     }
+
+    /*
+    void Update()
+    {
+        if(plate.digit3 != true && activeEditMode == 2)
+        {
+            digit3Disable.style.display = DisplayStyle.None;
+            digit3Enable.style.display = DisplayStyle.Flex;
+        }
+    }*/
 }
