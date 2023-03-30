@@ -9,31 +9,39 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(UIDocument))]
 public class UIManager : MonoBehaviour
 {
-    public PlateManager plate;
+    // Omaa säätöä
+    [Tooltip("PlateManager script from the GameObject based Plate.")]
+    [SerializeField] PlateManager _plate;
     
+    [Tooltip("CharacterManager scripts from each individual Character.")]
     [Header("Characters")]
-    public CharacterManager letterA;
-    public CharacterManager letterB;
-    public CharacterManager letterC;
-    public CharacterManager digit1;
-    public CharacterManager digit2;
-    public CharacterManager digit3;
-    
-    [Space(15)]
-    public GameObject[] modes;
+    [SerializeField] CharacterManager _letterA;
+    [SerializeField] CharacterManager _letterB;
+    [SerializeField] CharacterManager _letterC;
+    [SerializeField] CharacterManager _digit1;
+    [SerializeField] CharacterManager _digit2;
+    [SerializeField] CharacterManager _digit3;
 
-    //
-    [SerializeField] NavigationBar NavBar;
+    // UI Toolkit Sample -settiä
+    [Tooltip("Only one of these can be active at a time.")]
+    [Header("Modal interfaces")]
+    [SerializeField] CharacterEditor _characterEditor;
+    [SerializeField] BaseSelection _baseSelection;
 
-    UIDocument m_UIDocument;
-    public UIDocument UIDocument => m_UIDocument;
-    //
+    [Tooltip("These remain active unless disabled.")]
+    [Header("Constant interfaces")]
+    [SerializeField] NavigationBar _navigationBar;
+    [SerializeField] OptionsTab _optionsTab; // Options burger-menu + buttons OR window
 
-    const int defaultMode = 0;
-    int activeMode;
-    const int editModeValue = 1;
-    const int editModeCount = 2;
-    int activeEditMode;
+    [Tooltip("These block interfaces below, background acts as Back-button.")]
+    [Header("Full-screen overlays")]
+    [SerializeField] SettingsWindow _settings; // Either centered, or anchored to the left
+    [SerializeField] PromptWindow _prompt; // Used for Save & Reset and such
+
+    List<UIComponent> _allModalInterfaces = new List<UIComponent>();
+
+    UIDocument _uiDocument;
+    public UIDocument UIDocument => _uiDocument;
 
     // UI Buttons
     Button navBarFirst;
@@ -62,21 +70,72 @@ public class UIManager : MonoBehaviour
 
     void OnEnable()
     {
-        m_UIDocument = GetComponent<UIDocument>();
+        _uiDocument = GetComponent<UIDocument>();
+        SetupModalInterfaces();
+        //ShowBaseSelection();
+        ShowCharacterEditor();
     }
+
+    void SetupModalInterfaces()
+    {
+        if(_characterEditor != null)
+        {
+            _allModalInterfaces.Add(_characterEditor);
+
+            //Debug.Log(_characterEditor + " ei oo null");
+        }
+
+        if(_baseSelection != null)
+        {
+            _allModalInterfaces.Add(_baseSelection);
+
+            //Debug.Log(_baseSelection + " ei oo null");
+        }
+    }
+
+    void DisplayModalInterface(UIComponent component)
+    {
+        foreach (UIComponent c in _allModalInterfaces)
+        {
+            if(c == component)
+            {
+                Debug.Log(c + " on juttu. " + component + " on toinen juttu.");
+                c?.ShowComponent();
+                Debug.Log(c + " on juttu. " + component + " on toinen juttu.");
+            }
+            else
+            {
+                c?.HideComponent();
+            }
+        }
+    }
+
+    public void ShowCharacterEditor()
+    {
+        DisplayModalInterface(_characterEditor);
+    }
+
+    public void ShowBaseSelection()
+    {
+        DisplayModalInterface(_baseSelection);
+    }
+
+    /*void Awake()
+    {
+        Set
+    }*/
 
     // Start is called before the first frame update
     void Start() // private void OnEnable???
     {
-        //activeMode = defaultMode;
-        //SetMode();
+        //Time.timeScale = 1f;
 
         var root = GetComponent<UIDocument>().rootVisualElement; // var == VisualElement???
 
         //baseSelectButton = root.Q<Button>("ButtonBaseSelect");
 
-        navBarFirst = root.Q<Button>("nav-bar-button1");
-        navBarSecond = root.Q<Button>("nav-bar-button2");
+        //navBarFirst = root.Q<Button>("nav-bar-button1");
+        //navBarSecond = root.Q<Button>("nav-bar-button2");
         //Button navBarThird = root.Q<Button>("nav-bar-button3");
 
         letterAIncrease = root.Q<Button>("chars-letter1__up");
@@ -99,22 +158,22 @@ public class UIManager : MonoBehaviour
         digit3Disable = root.Q<Button>("chars-digit3__remove");
         digit3Enable = root.Q<Button>("chars-digit3__add");
 
-        navBarFirst.clicked += () => EnterEditMode();
-        navBarSecond.clicked += () => EnterBaseSelect();
+        //navBarFirst.clicked += () => EnterEditMode();
+        //navBarSecond.clicked += () => EnterBaseSelect();
         //navBarThird.clicked += () => BaseSelectClick();
 
-        letterAIncrease.clicked += () => letterA.IncreaseValue();
-        letterADecrease.clicked += () => letterA.DecreaseValue();
-        letterBIncrease.clicked += () => letterB.IncreaseValue();
-        letterBDecrease.clicked += () => letterB.DecreaseValue();
-        letterCIncrease.clicked += () => letterC.IncreaseValue();
-        letterCDecrease.clicked += () => letterC.DecreaseValue();
-        digit1Increase.clicked += () => digit1.IncreaseValue();
-        digit1Decrease.clicked += () => digit1.DecreaseValue();
-        digit2Increase.clicked += () => digit2.IncreaseValue();
-        digit2Decrease.clicked += () => digit2.DecreaseValue();
-        digit3Increase.clicked += () => digit3.IncreaseValue();
-        digit3Decrease.clicked += () => digit3.DecreaseValue();
+        letterAIncrease.clicked += () => _letterA.IncreaseValue();
+        letterADecrease.clicked += () => _letterA.DecreaseValue();
+        letterBIncrease.clicked += () => _letterB.IncreaseValue();
+        letterBDecrease.clicked += () => _letterB.DecreaseValue();
+        letterCIncrease.clicked += () => _letterC.IncreaseValue();
+        letterCDecrease.clicked += () => _letterC.DecreaseValue();
+        digit1Increase.clicked += () => _digit1.IncreaseValue();
+        digit1Decrease.clicked += () => _digit1.DecreaseValue();
+        digit2Increase.clicked += () => _digit2.IncreaseValue();
+        digit2Decrease.clicked += () => _digit2.DecreaseValue();
+        digit3Increase.clicked += () => _digit3.IncreaseValue();
+        digit3Decrease.clicked += () => _digit3.DecreaseValue();
 
         letterADisable.clicked += () => DisableLetterA();
         letterAEnable.clicked += () => EnableLetterA();
@@ -132,25 +191,6 @@ public class UIManager : MonoBehaviour
         // ja loput punaset
         letterADisable.style.display = DisplayStyle.None;
         digit3Disable.style.display = DisplayStyle.None;
-
-        Initialize();
-    }
-
-    public void Initialize()
-    {
-        activeEditMode = 1;
-    }
-
-    public void SwitchEditMode()
-    {
-        if(activeEditMode == 2)
-        {
-            EnterCharCountMode();
-        }
-        else
-        {
-            ExitCharCountMode();
-        }
     }
 
     public void EnterCharCountMode()
@@ -173,18 +213,18 @@ public class UIManager : MonoBehaviour
         digit3Disable.style.display = DisplayStyle.Flex;
         */
 
-        if(plate.letterA == true)
+        if(_plate.letterA == true)
         {
             letterADisable.style.display = DisplayStyle.Flex;
             //plate.letterA.SetActive(false);
         }
 
-        if(plate.digit3 == true)
+        if(_plate.digit3 == true)
         {
             digit3Disable.style.display = DisplayStyle.Flex;
         }
 
-        if(plate.digit2 == true && plate.digit3 != true)
+        if(_plate.digit2 == true && _plate.digit3 != true)
         {
             digit2Disable.style.display = DisplayStyle.Flex;
         }
@@ -192,6 +232,7 @@ public class UIManager : MonoBehaviour
 
     public void ExitCharCountMode()
     {
+        /*
         letterAEnable.style.display = DisplayStyle.None;
         digit3Enable.style.display = DisplayStyle.None;
         digit2Enable.style.display = DisplayStyle.None;
@@ -199,12 +240,13 @@ public class UIManager : MonoBehaviour
         digit2Disable.style.display = DisplayStyle.None;
         letterADisable.style.display = DisplayStyle.None;
         digit3Disable.style.display = DisplayStyle.None;
+        */
     }
 
 
     public void DisableLetterA()
     {
-        plate.letterA.SetActive(false);
+        _plate.letterA.SetActive(false);
 
         // Sets up/down buttons un-interactable
         letterAIncrease.SetEnabled(false);
@@ -216,7 +258,7 @@ public class UIManager : MonoBehaviour
 
     public void EnableLetterA()
     {
-        plate.letterA.SetActive(true);
+        _plate.letterA.SetActive(true);
 
         // Recovers interaction in up/down buttons
         letterAIncrease.SetEnabled(true);
@@ -228,7 +270,7 @@ public class UIManager : MonoBehaviour
 
     public void DisableDigit2()
     {
-        plate.digit2.SetActive(false);
+        _plate.digit2.SetActive(false);
 
         // Sets up/down buttons un-interactable
         digit2Increase.SetEnabled(false);
@@ -243,7 +285,7 @@ public class UIManager : MonoBehaviour
 
     public void EnableDigit2()
     {
-        plate.digit2.SetActive(true);
+        _plate.digit2.SetActive(true);
 
         // Recovers interaction in up/down buttons
         digit2Increase.SetEnabled(true);
@@ -258,7 +300,7 @@ public class UIManager : MonoBehaviour
 
     public void DisableDigit3()
     {
-        plate.digit3.SetActive(false);
+        _plate.digit3.SetActive(false);
 
         // Sets up/down buttons un-interactable
         digit3Increase.SetEnabled(false);
@@ -273,7 +315,7 @@ public class UIManager : MonoBehaviour
 
     public void EnableDigit3()
     {
-        plate.digit3.SetActive(true);
+        _plate.digit3.SetActive(true);
 
         // Recovers interaction in up/down buttons
         digit3Increase.SetEnabled(true);
@@ -286,7 +328,7 @@ public class UIManager : MonoBehaviour
         digit2Disable.style.display = DisplayStyle.None;
     }
 
-    public void SetMode()
+    /*public void SetMode()
     {
         //
         for(int i = 0; i < modes.Length; i++)
@@ -303,64 +345,31 @@ public class UIManager : MonoBehaviour
         }
 
         Debug.Log("Current mode: " + activeMode);
-    }
+    }*/
 
     public void EnterEditMode()
     {
         Debug.Log("MERKIT");
-
-        if(activeEditMode == defaultMode)
-        {
-            activeEditMode = editModeValue;
-        }
-        else if(activeEditMode == editModeValue)
-        {
-            activeEditMode = editModeCount;
-        }
-        else if(activeEditMode == editModeCount)
-        {
-            activeEditMode = editModeValue;
-        }
-
-        SwitchEditMode();
     }
 
     public void EnterBaseSelect()
     {
         Debug.Log("POHJAT");
 
-        plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
-    }
-
-    public void ArrayValueClick()
-    {
-        activeMode = 0;
-
-        SetMode();
-    }
-
-    public void AddRemoveClick()
-    {
-        activeMode = 1;
-
-        SetMode();
+        _plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
     }
 
     public void BaseSelectClick()
     {
-        activeMode = 2;
-
-        SetMode();
-        plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
+        _plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
     }
 
     /*
-    void Update()
-    {
-        if(plate.digit3 != true && activeEditMode == 2)
+
+        void Awake()
         {
-            digit3Disable.style.display = DisplayStyle.None;
-            digit3Enable.style.display = DisplayStyle.Flex;
+            Method joka on paska
         }
-    }*/
+
+    */
 }

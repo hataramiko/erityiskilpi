@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/eki.uss?fileID=7433441132597879392&amp;guid=9e95c15db30d64b4d86a01a271faf9d9&amp;type=3#eki" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:VisualElement name="base-selection-tabs" style="flex-direction: row; align-items: flex-end; justify-content: center; flex-basis: 20%; flex-shrink: 0;">
+            <ui:VisualElement name="bases-euro-tab" class="bases__tab">
+                <ui:Label text="Euro..." display-tooltip-when-elided="true" name="bases-euro-tab-label" class="bases__tab-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="bases-white-tab" class="bases__tab">
+                <ui:Label text="Valko..." display-tooltip-when-elided="true" name="bases-white-tab-label" class="bases__tab-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="bases-black-tab" class="bases__tab">
+                <ui:Label text="Musta..." display-tooltip-when-elided="true" name="bases-black-tab-label" class="bases__tab-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="bases-euro-content" class="bases__content">
+            <ui:VisualElement name="bases-euro-button1" class="bases__button" />
+            <ui:VisualElement name="bases-euro-button2" />
+        </ui:VisualElement>
+        <ui:VisualElement name="bases-white-content" class="bases__content bases__button">
+            <ui:VisualElement name="bases-white-button1" class="bases__button" />
+            <ui:VisualElement name="bases-white-button2" />
+            <ui:VisualElement name="bases-white-button3" />
+        </ui:VisualElement>
+        <ui:VisualElement name="bases-black-content" class="bases__content bases__button">
+            <ui:VisualElement name="bases-black-button1" class="bases__button" />
+            <ui:VisualElement name="bases-black-button2" class="bases__button" />
+            <ui:VisualElement name="bases-black-button3" class="bases__button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
