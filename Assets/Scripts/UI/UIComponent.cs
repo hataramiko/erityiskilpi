@@ -100,7 +100,7 @@ public abstract class UIComponent : MonoBehaviour
 
     public virtual void ShowComponent()
     {
-        ShowVisualElement(_component, true); Debug.Log(_component);
+        ShowVisualElement(_component, true); //Debug.Log(_component);
         ComponentEnable?.Invoke();
     }
 

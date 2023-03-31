@@ -51,13 +51,15 @@ public class PlateManager : MonoBehaviour
     public Vector2 digitsPosition2;
 
     //RectTransform contents;
-    int activeBase;
-    private bool flip;
+    int _activeBase;
+    bool _isFlipping;
+
+    ColorManager _colorManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        activeBase = defaultBase;
+        _activeBase = defaultBase;
         DisplayBase();
     }
 
@@ -68,7 +70,7 @@ public class PlateManager : MonoBehaviour
             bases[i].SetActive(false);
         }
 
-        bases[activeBase].SetActive(true);
+        bases[_activeBase].SetActive(true);
 
         // Checks active base and sets variables accordingly
         CheckBase();
@@ -79,7 +81,7 @@ public class PlateManager : MonoBehaviour
     public void CheckBase()
     {
         // Checks for Euroband
-        if(activeBase <= 1)
+        if(_activeBase <= 1)
         {
             isEuro = true;
         }
@@ -89,7 +91,7 @@ public class PlateManager : MonoBehaviour
         }
 
         // Checks if base is tall
-        if(activeBase == 1)
+        if(_activeBase == 1)
         {
             isTall = true;
         }
@@ -99,7 +101,7 @@ public class PlateManager : MonoBehaviour
         }
 
         // Checks if base is small
-        if(activeBase == 3 || activeBase == 6)
+        if(_activeBase == 3 || _activeBase == 6)
         {
             isSmall = true;
         }
@@ -109,7 +111,7 @@ public class PlateManager : MonoBehaviour
         }
 
         // Checks if base is short
-        if(activeBase == 4 || activeBase == 7)
+        if(_activeBase == 4 || _activeBase == 7)
         {
             isShort = true;
         }
@@ -129,7 +131,7 @@ public class PlateManager : MonoBehaviour
         }
 
         // Checks if base is black
-        if(activeBase >= 5)
+        if(_activeBase >= 5)
         {
             isBlack = true;
         }
@@ -173,11 +175,11 @@ public class PlateManager : MonoBehaviour
         {
             digit3.SetActive(false);
 
-            if(digit3.activeSelf != true && flip == true)
+            if(digit3.activeSelf != true && _isFlipping == true)
             {
                 letterA.SetActive(false);
                 digit3.SetActive(true);
-                flip = false;
+                _isFlipping = false;
             }
         }
 
@@ -258,17 +260,17 @@ public class PlateManager : MonoBehaviour
 
     public void SelectBase(int n)
     {
-        activeBase = n;
+        _activeBase = n;
         DisplayBase();
     }
 
     public void BaseArrayIncrease()
     {
-        activeBase++;
+        _activeBase++;
 
-        if(activeBase >= bases.Length)
+        if(_activeBase >= bases.Length)
         {
-            activeBase = 0;
+            _activeBase = 0;
         }
 
         //Debug.Log("Current value in 'bases' array: " + activeBase);
@@ -282,7 +284,7 @@ public class PlateManager : MonoBehaviour
 
     public void SwitchEnds()
     {
-        flip = true;
+        _isFlipping = true;
     }
 
     // Update is called once per frame

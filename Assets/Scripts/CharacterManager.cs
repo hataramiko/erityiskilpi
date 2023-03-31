@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    //public bool isFirstLetter; // Is the only disposable letter.
-    public bool isFirstDigit;  // Cannot be 0 or disposed of.
+    public bool isFirstDigit; // Cannot be 0 or disposed of.
     public GameObject[] characters;
-
-    //public bool disposable;
 
     private int value;
     private int minValue;

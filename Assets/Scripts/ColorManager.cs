@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 /*
     Changes color of characters according to the color of active base.
 */
@@ -11,9 +10,8 @@ public class ColorManager : MonoBehaviour
 {
     public PlateManager plate;
 
-    private Color activeColor;
+    Color _activeColor;
     
-    // Start is called before the first frame update
     void Start()
     {
         SetColor();
@@ -23,22 +21,21 @@ public class ColorManager : MonoBehaviour
     {
         CheckBaseColor();
 
-        GetComponent<Image>().color = activeColor;
+        GetComponent<Image>().color = _activeColor;
     }
 
     public void CheckBaseColor()
     {
         if(plate.isBlack == true)
         {
-            activeColor = Color.white;
+            _activeColor = Color.white;
         }
         else
         {
-            activeColor = Color.black;
+            _activeColor = Color.black;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         SetColor();

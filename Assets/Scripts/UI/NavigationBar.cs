@@ -10,8 +10,8 @@ public class NavigationBar : UIComponent
 
     //const string ACTIVE_MODE_MARKER = "";
 
-    Button _navBarFirst;
-    Button _navBarSecond;
+    Button _charactersButton;
+    Button _basesButton;
 
     //VisualElement _activeModeMarker;
 
@@ -19,8 +19,8 @@ public class NavigationBar : UIComponent
     {
         base.SetVisualElements();
 
-        _navBarFirst = _root.Q<Button>(NAV_BAR_CHARACTERS_BUTTON);
-        _navBarSecond = _root.Q<Button>(NAV_BAR_BASES_BUTTON);
+        _charactersButton = _root.Q<Button>(NAV_BAR_CHARACTERS_BUTTON);
+        _basesButton = _root.Q<Button>(NAV_BAR_BASES_BUTTON);
 
         //_activeModeMarker = _root.Q<VisualElement>(ACTIVE_MODE_MARKER);
     }
@@ -29,21 +29,21 @@ public class NavigationBar : UIComponent
     {
         base.RegisterButtonCallbacks();
 
-        _navBarFirst?.RegisterCallback<ClickEvent>(DisplayChars);
-        _navBarSecond?.RegisterCallback<ClickEvent>(DisplayBases);
+        _charactersButton?.RegisterCallback<ClickEvent>(EnterCharacterEditor);
+        _basesButton?.RegisterCallback<ClickEvent>(EnterBaseSelection);
     }
 
-    void DisplayChars(ClickEvent evt)
+    void EnterCharacterEditor(ClickEvent evt)
     {
-        ActivateButton(_navBarFirst);
-        _UIManager?.EnterEditMode();
+        ActivateButton(_charactersButton);
+        _UIManager?.DisplayCharacterEditor();
         ClickMarker(evt);
     }
 
-    void DisplayBases(ClickEvent evt)
+    void EnterBaseSelection(ClickEvent evt)
     {
-        ActivateButton(_navBarSecond);
-        _UIManager?.EnterBaseSelect();
+        ActivateButton(_basesButton);
+        _UIManager?.DisplayBaseSelection();
         ClickMarker(evt);
     }
 

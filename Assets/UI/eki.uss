@@ -61,7 +61,7 @@
 }
 
 .chars__button-count--remove {
-    background-color: rgba(230, 92, 92, 0.9);
+    background-color: rgba(230, 92, 92, 0.33);
     border-left-color: rgba(204, 82, 82, 0.9);
     border-right-color: rgba(204, 82, 82, 0.9);
     border-top-color: rgba(204, 82, 82, 0.9);
@@ -70,7 +70,7 @@
     border-right-width: 10px;
     border-top-width: 10px;
     border-bottom-width: 10px;
-    color: rgb(154, 0, 0);
+    color: rgba(154, 0, 0, 0);
     left: 0;
     position: absolute;
     top: 0;
@@ -79,7 +79,7 @@
 }
 
 .chars__button-count--add {
-    background-color: rgba(92, 230, 92, 0.9);
+    background-color: rgba(92, 230, 92, 0.33);
     border-left-width: 10px;
     border-right-width: 10px;
     border-top-width: 10px;
@@ -88,7 +88,7 @@
     border-right-color: rgba(82, 204, 82, 0.9);
     border-top-color: rgba(82, 204, 82, 0.9);
     border-bottom-color: rgba(82, 204, 82, 0.9);
-    color: rgb(0, 152, 0);
+    color: rgba(0, 152, 0, 0);
     position: absolute;
     left: 0;
     top: 0;

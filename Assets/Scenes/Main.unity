@@ -1071,6 +1071,12 @@ MonoBehaviour:
   _componentName: CharacterEditor
   _UIManager: {fileID: 1616439971}
   _UIDocument: {fileID: 1616439972}
+  letterA: {fileID: 2043403081}
+  letterB: {fileID: 425786403}
+  letterC: {fileID: 203164501}
+  digit1: {fileID: 84878496}
+  digit2: {fileID: 1792988768}
+  digit3: {fileID: 219217027}
 --- !u!1 &148073803 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3043671701542998477, guid: 96e5fb1d72a97414c9453ba5b99937f6, type: 3}
@@ -11456,13 +11462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6feaad122f8eb6429681fe30318634d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _plate: {fileID: 478023590}
-  _letterA: {fileID: 649371903}
-  _letterB: {fileID: 1617879325}
-  _letterC: {fileID: 1233994915}
-  _digit1: {fileID: 1944031191}
-  _digit2: {fileID: 2009140421}
-  _digit3: {fileID: 1599429838}
+  plate: {fileID: 478023590}
   _characterEditor: {fileID: 128030640}
   _baseSelection: {fileID: 832477382}
   _navigationBar: {fileID: 949675717}
