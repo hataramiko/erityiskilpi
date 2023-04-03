@@ -34,10 +34,10 @@ public class UIManager : MonoBehaviour
     public UIDocument UIDocument => _uiDocument;
 
     const string EDIT_CHARACTERS_WINDOW = "edit-characters";
-    //const string EDIT_BASES_WINDOW = "edit-bases";
+    const string EDIT_BASES_WINDOW = "edit-bases";
 
     VisualElement _characterEditorContent;
-    //VisualElement _baseSelectionContent;
+    VisualElement _baseSelectionContent;
 
 
     void OnEnable()
@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
 
         var root = _uiDocument.rootVisualElement; // var == VisualElement???
         _characterEditorContent = root.Q<VisualElement>(EDIT_CHARACTERS_WINDOW);
+        _baseSelectionContent = root.Q<VisualElement>(EDIT_BASES_WINDOW);
     }
 
     void SetupModalInterfaces()
@@ -95,20 +96,43 @@ public class UIManager : MonoBehaviour
         DisplayModalInterface(_baseSelection);
     }
 
-    public void DisplayCharacterEditor()
+    public void EnableCharacterEditor()
     {
+        //HideBaseSelection();
+        DisplayCharacterEditor();
+        
         Debug.Log("MERKIT");
+    }
+
+    public void EnableBaseSelection()
+    {
+        plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
+
+        HideCharacterEditor();
+        //DisplayBaseSelection();
+
+        Debug.Log("POHJAT");
+    }
+
+    void DisplayCharacterEditor()
+    {
+        _characterEditor.SetAddRemoveButtons(false);
+        _characterEditor.SetUpDownButtons(true);
         _characterEditorContent.style.display = DisplayStyle.Flex;
     }
 
-    public void DisplayBaseSelection()
+    void HideCharacterEditor()
     {
-        Debug.Log("POHJAT");
         _characterEditorContent.style.display = DisplayStyle.None;
+    }
 
-        plate.BaseArrayIncrease(); // Changes base by increasing array value by 1
+    void DisplayBaseSelection()
+    {
+        //_baseSelectionContent.style.display = DisplayStyle.Flex;
+    }
 
-        /*CharacterEditor characterEditor = GetComponentInChildren<CharacterEditor>();
-        characterEditor.CheckButtons();*/
+    void HideBaseSelection()
+    {
+        //_baseSelectionContent.style.display = DisplayStyle.None;
     }
 }

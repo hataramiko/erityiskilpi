@@ -73,7 +73,8 @@ public class CharacterEditor : UIComponent
         base.Awake();
 
         GetCharacterManagers();
-        DisableAddRemoveButtons();
+        SetUpDownButtons(true); // Likely don't need this one but is here just to be safe
+        SetAddRemoveButtons(false);
     }
 
     protected override void SetVisualElements()
@@ -130,82 +131,99 @@ public class CharacterEditor : UIComponent
         _switchModeButton?.RegisterCallback<ClickEvent>(SwitchEditorMode);
     }
 
-    void EnableAddRemoveButtons()
+    public void SetAddRemoveButtons(bool isActive)
     {
-        CheckButtons();
-    }
-
-    public void CheckButtons()
-    {
-        // Checks if LetterA is active or not, and displays the correct button
-        if(letterA.activeSelf != true) // .BC-
+        if(isActive != true)
         {
-            _letterAUp.SetEnabled(false);
-            _letterADown.SetEnabled(false);
-
-            _letterARemove.style.display = DisplayStyle.None;
-            _letterAAdd.style.display = DisplayStyle.Flex;
+            DisableAddRemoveButtons();
         }
-        else // ABC-
+        else
         {
-            _letterAUp.SetEnabled(true);
-            _letterADown.SetEnabled(true);
-
-            _letterAAdd.style.display = DisplayStyle.None;
-            _letterARemove.style.display = DisplayStyle.Flex;
-        }
-
-        // Checks which Digits are active, and displays buttons accordingly
-        if(digit2.activeSelf != true && digit3.activeSelf != true) // -1..
-        {
-            _digit2Up.SetEnabled(false);
-            _digit2Down.SetEnabled(false);
-            _digit3Up.SetEnabled(false);
-            _digit3Down.SetEnabled(false);
-
-            _digit3Add.style.display = DisplayStyle.None;
-            _digit3Remove.style.display = DisplayStyle.None;
-            _digit2Remove.style.display = DisplayStyle.None;
-
-            _digit2Add.style.display = DisplayStyle.Flex;
-        }
-        else if(digit2.activeSelf != false && digit3.activeSelf != true) // -12.
-        {
-            _digit3Up.SetEnabled(false);
-            _digit3Down.SetEnabled(false);
-
-            _digit2Up.SetEnabled(true);
-            _digit2Down.SetEnabled(true);
-
-            _digit2Add.style.display = DisplayStyle.None;
-            _digit3Remove.style.display = DisplayStyle.None;
-
-            _digit2Remove.style.display = DisplayStyle.Flex;
-            _digit3Add.style.display = DisplayStyle.Flex;
-        }
-        else // -123
-        {
-            _digit2Up.SetEnabled(true);
-            _digit2Down.SetEnabled(true);
-            _digit3Up.SetEnabled(true);
-            _digit3Down.SetEnabled(true);
-
-            _digit2Add.style.display = DisplayStyle.None;
-            _digit2Remove.style.display = DisplayStyle.None;
-            _digit3Add.style.display = DisplayStyle.None;
-
-            _digit3Remove.style.display = DisplayStyle.Flex;
+            EnableAddRemoveButtons();
         }
     }
 
-    void DisableAddRemoveButtons()
+    public void SetUpDownButtons(bool isActive)
     {
-        _letterAAdd.style.display = DisplayStyle.None;
-        _letterARemove.style.display = DisplayStyle.None;
-        _digit2Add.style.display = DisplayStyle.None;
-        _digit2Remove.style.display = DisplayStyle.None;
-        _digit3Add.style.display = DisplayStyle.None;
-        _digit3Remove.style.display = DisplayStyle.None;
+        if(isActive != true)
+        {
+            DisableUpDownButtons();
+        }
+        else
+        {
+            EnableUpDownButtons();
+        }
+    }
+
+    void GetCharacterManagers()
+    {
+        _letterAManager = letterA.GetComponent<CharacterManager>();
+        _letterBManager = letterB.GetComponent<CharacterManager>();
+        _letterCManager = letterC.GetComponent<CharacterManager>();
+        _digit1Manager = digit1.GetComponent<CharacterManager>();
+        _digit2Manager = digit2.GetComponent<CharacterManager>();
+        _digit3Manager = digit3.GetComponent<CharacterManager>();
+    }
+
+    void SwitchEditorMode(ClickEvent evt)
+    {
+        if(letterA.activeSelf == true && _letterARemove.style.display == DisplayStyle.None ||
+            letterA.activeSelf == false && _letterAAdd.style.display == DisplayStyle.None)
+        {
+            EnableAddRemoveButtons();
+            DisableUpDownButtons();
+        }
+        else
+        {
+            DisableAddRemoveButtons();
+            EnableUpDownButtons();
+        }
+    }
+
+    void EnableCharacter(char character)
+    {
+        if(character == 'A')
+        {
+            letterA.SetActive(true);
+            _UIManager.plate.CheckForFlipping();
+        }
+        else if(character == '2')
+        {
+            digit2.SetActive(true);
+        }
+        else if(character == '3')
+        {
+            digit3.SetActive(true);
+            _UIManager.plate.CheckForFlipping();
+        }
+        else
+        {
+            Debug.LogWarning("Cannot enable character. Character equals " + character);
+        }
+
+        SetAddRemoveButtons(true);
+    }
+
+    void DisableCharacter(char character)
+    {
+        if(character == 'A')
+        {
+            letterA.SetActive(false);
+        }
+        else if(character == '2')
+        {
+            digit2.SetActive(false);
+        }
+        else if(character == '3')
+        {
+            digit3.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("Cannot enable character. Character equals " + character);
+        }
+
+        SetAddRemoveButtons(true);
     }
 
     void IncreaseCharacter(char character)
@@ -272,48 +290,6 @@ public class CharacterEditor : UIComponent
         }
     }
 
-    void EnableCharacter(char character)
-    {
-        if(character == 'A')
-        {
-            letterA.SetActive(true);
-        }
-        else if(character == '2')
-        {
-            digit2.SetActive(true);
-        }
-        else if(character == '3')
-        {
-            digit3.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("Cannot enable character. Character equals " + character);
-        }
-
-        // Tänne PlateManager.flip tms
-    }
-
-    void DisableCharacter(char character)
-    {
-        if(character == 'A')
-        {
-            letterA.SetActive(false);
-        }
-        else if(character == '2')
-        {
-            digit2.SetActive(false);
-        }
-        else if(character == '3')
-        {
-            digit3.SetActive(false);
-        }
-        else
-        {
-            Debug.LogWarning("Cannot enable character. Character equals " + character);
-        }
-    }
-
     void IncreaseLetterA(ClickEvent evt)
     {
         IncreaseCharacter('A');
@@ -374,62 +350,143 @@ public class CharacterEditor : UIComponent
         DecreaseCharacter('3');
     }
 
-    void SwitchEditorMode(ClickEvent evt)
+    void EnableUpDownButtons()
     {
-        if(letterA.activeSelf == true && _letterARemove.style.display == DisplayStyle.None ||
-            letterA.activeSelf == false && _letterAAdd.style.display == DisplayStyle.None)
+        _letterBUp.SetEnabled(true);
+        _letterBDown.SetEnabled(true);
+        _letterCUp.SetEnabled(true);
+        _letterCDown.SetEnabled(true);
+        _digit1Up.SetEnabled(true);
+        _digit1Down.SetEnabled(true);
+
+        if(letterA.activeSelf != true)
         {
-            EnableAddRemoveButtons();
+            _letterAUp.SetEnabled(false);
+            _letterADown.SetEnabled(false);
         }
         else
         {
-            DisableAddRemoveButtons();
+            _letterAUp.SetEnabled(true);
+            _letterADown.SetEnabled(true);
         }
+
+        if(digit2.activeSelf != true)
+        {
+            _digit2Up.SetEnabled(false);
+            _digit2Down.SetEnabled(false);
+        }
+        else
+        {
+            _digit2Up.SetEnabled(true);
+            _digit2Down.SetEnabled(true);
+        }
+
+        if(digit3.activeSelf != true)
+        {
+            _digit3Up.SetEnabled(false);
+            _digit3Down.SetEnabled(false);
+        }
+        else
+        {
+            _digit3Up.SetEnabled(true);
+            _digit3Down.SetEnabled(true);
+        }
+    }
+
+    void DisableUpDownButtons()
+    {
+        _letterAUp.SetEnabled(false);
+        _letterADown.SetEnabled(false);
+        _letterBUp.SetEnabled(false);
+        _letterBDown.SetEnabled(false);
+        _letterCUp.SetEnabled(false);
+        _letterCDown.SetEnabled(false);
+        _digit1Up.SetEnabled(false);
+        _digit1Down.SetEnabled(false);
+        _digit2Up.SetEnabled(false);
+        _digit2Down.SetEnabled(false);
+        _digit3Up.SetEnabled(false);
+        _digit3Down.SetEnabled(false);
+    }
+
+    void EnableAddRemoveButtons()
+    {
+        if(letterA.activeSelf != true) // .BC-
+        {
+            _letterARemove.style.display = DisplayStyle.None;
+            _letterAAdd.style.display = DisplayStyle.Flex;
+        }
+        else // ABC-
+        {
+            _letterAAdd.style.display = DisplayStyle.None;
+            _letterARemove.style.display = DisplayStyle.Flex;
+        }
+
+        // Checks which Digits are active, and displays buttons accordingly
+        if(digit2.activeSelf != true && digit3.activeSelf != true) // -1..
+        {
+            _digit3Add.style.display = DisplayStyle.None;
+            _digit3Remove.style.display = DisplayStyle.None;
+            _digit2Remove.style.display = DisplayStyle.None;
+
+            _digit2Add.style.display = DisplayStyle.Flex;
+        }
+        else if(digit2.activeSelf != false && digit3.activeSelf != true) // -12.
+        {
+            _digit2Add.style.display = DisplayStyle.None;
+            _digit3Remove.style.display = DisplayStyle.None;
+
+            _digit2Remove.style.display = DisplayStyle.Flex;
+            _digit3Add.style.display = DisplayStyle.Flex;
+        }
+        else // -123
+        {
+            _digit2Add.style.display = DisplayStyle.None;
+            _digit2Remove.style.display = DisplayStyle.None;
+            _digit3Add.style.display = DisplayStyle.None;
+
+            _digit3Remove.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    void DisableAddRemoveButtons()
+    {
+        _letterAAdd.style.display = DisplayStyle.None;
+        _letterARemove.style.display = DisplayStyle.None;
+        _digit2Add.style.display = DisplayStyle.None;
+        _digit2Remove.style.display = DisplayStyle.None;
+        _digit3Add.style.display = DisplayStyle.None;
+        _digit3Remove.style.display = DisplayStyle.None;
     }
 
     void EnableLetterA(ClickEvent evt)
     {
         EnableCharacter('A');
-        CheckButtons();
     }
 
     void DisableLetterA(ClickEvent evt)
     {
         DisableCharacter('A');
-        CheckButtons();
     }
 
     void EnableDigit2(ClickEvent evt)
     {
         EnableCharacter('2');
-        CheckButtons();
     }
 
     void DisableDigit2(ClickEvent evt)
     {
         DisableCharacter('2');
-        CheckButtons();
     }
 
     void EnableDigit3(ClickEvent evt)
     {
+        _UIManager.plate.SwitchEnds();
         EnableCharacter('3');
-        CheckButtons();
     }
 
     void DisableDigit3(ClickEvent evt)
     {
         DisableCharacter('3');
-        CheckButtons();
-    }
-
-    void GetCharacterManagers()
-    {
-        _letterAManager = letterA.GetComponent<CharacterManager>();
-        _letterBManager = letterB.GetComponent<CharacterManager>();
-        _letterCManager = letterC.GetComponent<CharacterManager>();
-        _digit1Manager = digit1.GetComponent<CharacterManager>();
-        _digit2Manager = digit2.GetComponent<CharacterManager>();
-        _digit3Manager = digit3.GetComponent<CharacterManager>();
     }
 }

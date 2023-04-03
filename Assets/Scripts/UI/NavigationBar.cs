@@ -36,14 +36,14 @@ public class NavigationBar : UIComponent
     void EnterCharacterEditor(ClickEvent evt)
     {
         ActivateButton(_charactersButton);
-        _UIManager?.DisplayCharacterEditor();
+        _UIManager?.EnableCharacterEditor();
         ClickMarker(evt);
     }
 
     void EnterBaseSelection(ClickEvent evt)
     {
         ActivateButton(_basesButton);
-        _UIManager?.DisplayBaseSelection();
+        _UIManager?.EnableBaseSelection();
         ClickMarker(evt);
     }
 

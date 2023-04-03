@@ -166,11 +166,8 @@ public class PlateManager : MonoBehaviour
         }
     }
 
-    // Positions Contents based on active characters and base
-    public void AlignHorizontal()
+    public void CheckForFlipping()
     {
-        Vector2 position;
-
         if(isShort == true && letterA.activeSelf == true && digit3.activeSelf == true)
         {
             digit3.SetActive(false);
@@ -182,6 +179,14 @@ public class PlateManager : MonoBehaviour
                 _isFlipping = false;
             }
         }
+    }
+
+    // Positions Contents based on active characters and base
+    public void AlignHorizontal()
+    {
+        Vector2 position;
+
+        CheckForFlipping();
 
         // Centers Contents relative to Base based on active characters
         if(letterA.activeSelf == false && digit2.activeSelf != true) // BC-1
@@ -234,25 +239,25 @@ public class PlateManager : MonoBehaviour
     public void AlignVertical()
     {
         // Sets position of Letters
-        if(letterA.activeSelf == false) // BC
+        if(letterA.activeSelf == false) // BC-
         {
             letters.GetComponent<RectTransform>().localPosition = lettersPosition1;
         }
-        else // ABC
+        else // ABC-
         {
             letters.GetComponent<RectTransform>().localPosition = lettersPosition0;
         }
 
         // Sets position of Digits
-        if(digit2.activeSelf != true) // 1
+        if(digit2.activeSelf != true) // -1
         {
             digits.GetComponent<RectTransform>().localPosition = digitsPosition2;
         }
-        else if(digit3.activeSelf != true) // 12
+        else if(digit3.activeSelf != true) // -12
         {
             digits.GetComponent<RectTransform>().localPosition = digitsPosition1;
         }
-        else // 123
+        else // -123
         {
             digits.GetComponent<RectTransform>().localPosition = digitsPosition0;
         }
@@ -273,13 +278,7 @@ public class PlateManager : MonoBehaviour
             _activeBase = 0;
         }
 
-        //Debug.Log("Current value in 'bases' array: " + activeBase);
         DisplayBase();
-    }
-
-    public void ChangeArrayValue()
-    {
-
     }
 
     public void SwitchEnds()
