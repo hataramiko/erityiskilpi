@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    "Character Controller"? Controls individual characters. 
+*/
 public class CharacterManager : MonoBehaviour
 {
     public bool isFirstDigit; // Cannot be 0 or disposed of.

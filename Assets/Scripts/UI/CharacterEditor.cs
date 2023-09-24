@@ -17,22 +17,24 @@ public class CharacterEditor : UIComponent
     // Letters
     const string LETTER_A_BUTTON_UP = "chars-letter1__up";
     const string LETTER_A_BUTTON_DOWN = "chars-letter1__down";
-    const string LETTER_A_BUTTON_ADD = "chars-letter1__add";
-    const string LETTER_A_BUTTON_REMOVE = "chars-letter1__remove";
     const string LETTER_B_BUTTON_UP = "chars-letter2__up";
     const string LETTER_B_BUTTON_DOWN = "chars-letter2__down";
     const string LETTER_C_BUTTON_UP = "chars-letter3__up";
     const string LETTER_C_BUTTON_DOWN = "chars-letter3__down";
+
+    const string LETTER_A_BUTTON_ADD = "chars-letter1__add";
+    const string LETTER_A_BUTTON_REMOVE = "chars-letter1__remove";
 
     // Digits
     const string DIGIT_1_BUTTON_UP = "chars-digit1__up";
     const string DIGIT_1_BUTTON_DOWN = "chars-digit1__down";
     const string DIGIT_2_BUTTON_UP = "chars-digit2__up";
     const string DIGIT_2_BUTTON_DOWN = "chars-digit2__down";
-    const string DIGIT_2_BUTTON_ADD = "chars-digit2__add";
-    const string DIGIT_2_BUTTON_REMOVE = "chars-digit2__remove";
     const string DIGIT_3_BUTTON_UP = "chars-digit3__up";
     const string DIGIT_3_BUTTON_DOWN = "chars-digit3__down";
+
+    const string DIGIT_2_BUTTON_ADD = "chars-digit2__add";
+    const string DIGIT_2_BUTTON_REMOVE = "chars-digit2__remove";
     const string DIGIT_3_BUTTON_ADD = "chars-digit3__add";
     const string DIGIT_3_BUTTON_REMOVE = "chars-digit3__remove";
 
@@ -74,7 +76,7 @@ public class CharacterEditor : UIComponent
 
         GetCharacterManagers();
         SetUpDownButtons(true); // Likely don't need this one but is here just to be safe
-        SetAddRemoveButtons(false);
+        SetAddRemoveButtons(true);
     }
 
     protected override void SetVisualElements()
@@ -451,42 +453,67 @@ public class CharacterEditor : UIComponent
 
     void DisableAddRemoveButtons()
     {
+        /*
+        
+        // These won't be needed after relocating the buttons to the toolbar.
+        // Easier to comment out than to dig deeper.
+        // Maybe implement a cleaner fix later.
+
         _letterAAdd.style.display = DisplayStyle.None;
         _letterARemove.style.display = DisplayStyle.None;
         _digit2Add.style.display = DisplayStyle.None;
         _digit2Remove.style.display = DisplayStyle.None;
         _digit3Add.style.display = DisplayStyle.None;
         _digit3Remove.style.display = DisplayStyle.None;
+        */
     }
 
     void EnableLetterA(ClickEvent evt)
     {
         EnableCharacter('A');
+
+        _letterAUp.SetEnabled(true);
+        _letterADown.SetEnabled(true);
     }
 
     void DisableLetterA(ClickEvent evt)
     {
         DisableCharacter('A');
+
+        _letterAUp.SetEnabled(false);
+        _letterADown.SetEnabled(false);
     }
 
     void EnableDigit2(ClickEvent evt)
     {
         EnableCharacter('2');
+
+        _digit2Up.SetEnabled(true);
+        _digit2Down.SetEnabled(true);
     }
 
     void DisableDigit2(ClickEvent evt)
     {
         DisableCharacter('2');
+
+        _digit2Up.SetEnabled(false);
+        _digit2Down.SetEnabled(false);
     }
 
     void EnableDigit3(ClickEvent evt)
     {
         _UIManager.plate.SwitchEnds();
         EnableCharacter('3');
+
+        _digit3Up.SetEnabled(true);
+        _digit3Down.SetEnabled(true);
     }
 
     void DisableDigit3(ClickEvent evt)
     {
         DisableCharacter('3');
+
+        _digit3Up.SetEnabled(false);
+        _digit3Down.SetEnabled(false);
     }
 }

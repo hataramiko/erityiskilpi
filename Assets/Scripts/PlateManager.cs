@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+    Manages how the plate is displayed.
+    Position of characters and the base and whatnot.
+*/
 public class PlateManager : MonoBehaviour
 {
     [Header("Preferences")]

@@ -47,8 +47,8 @@
                         <ui:VisualElement name="characters-button-letter1" class="characters__button-container">
                             <ui:Button text="+" display-tooltip-when-elided="true" name="chars-letter1__up" class="chars__button chars__button-value--up" />
                             <ui:Button text="-" display-tooltip-when-elided="true" name="chars-letter1__down" class="chars__button chars__button-value--down" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-letter1__remove" class="chars__button chars__button-count--remove" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-letter1__add" class="chars__button chars__button-count--add" />
+                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-letter1__remove_OLD" class="chars__button chars__button-count--remove" style="display: none;" />
+                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-letter1__add_OLD" class="chars__button chars__button-count--add" style="display: none;" />
                         </ui:VisualElement>
                         <ui:VisualElement name="characters-button-letter2" class="characters__button-container">
                             <ui:Button text="+" display-tooltip-when-elided="true" name="chars-letter2__up" class="chars__button chars__button-value--up" />
@@ -68,28 +68,28 @@
                         <ui:VisualElement name="characters-button-digit2" class="characters__button-container">
                             <ui:Button text="+" display-tooltip-when-elided="true" name="chars-digit2__up" class="chars__button chars__button-value--up" />
                             <ui:Button text="-" display-tooltip-when-elided="true" name="chars-digit2__down" class="chars__button chars__button-value--down" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit2__remove" class="chars__button chars__button-count--remove" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit2__add" class="chars__button chars__button-count--add" />
+                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit2__remove_OLD" class="chars__button chars__button-count--remove" style="display: none;" />
+                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit2__add_OLD" class="chars__button chars__button-count--add" style="display: none;" />
                         </ui:VisualElement>
                         <ui:VisualElement name="characters-button-digit3" class="characters__button-container">
                             <ui:Button text="+" display-tooltip-when-elided="true" name="chars-digit3__up" class="chars__button chars__button-value--up" />
                             <ui:Button text="-" display-tooltip-when-elided="true" name="chars-digit3__down" class="chars__button chars__button-value--down" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit3__remove" class="chars__button chars__button-count--remove" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit3__add" class="chars__button chars__button-count--add" />
+                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit3__remove_OLD" class="chars__button chars__button-count--remove" style="display: none;" />
+                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit3__add_OLD" class="chars__button chars__button-count--add" style="display: none;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
-                    <ui:VisualElement name="characters-toolbar" style="justify-content: space-between; align-items: stretch; flex-direction: row; flex-shrink: 0; flex-grow: 1; flex-basis: 20%;">
-                        <ui:VisualElement name="characters-button-letter1" class="characters__button-container">
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-letter1__remove" class="chars__button chars__button-count--remove" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-letter1__add" class="chars__button chars__button-count--add" />
+                    <ui:VisualElement name="characters-toolbar" style="justify-content: flex-end; align-items: stretch; flex-direction: row; flex-shrink: 0; flex-grow: 1; flex-basis: 20%;">
+                        <ui:VisualElement name="characters-button-letter1" class="characters__button-container" style="margin-right: 52%; margin-top: 0;">
+                            <ui:Button display-tooltip-when-elided="true" name="chars-letter1__remove" class="chars__button chars__button-count--remove" />
+                            <ui:Button display-tooltip-when-elided="true" name="chars-letter1__add" class="chars__button chars__button-count--add" />
                         </ui:VisualElement>
-                        <ui:VisualElement name="characters-button-digit2" class="characters__button-container">
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit2__remove" class="chars__button chars__button-count--remove" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit2__add" class="chars__button chars__button-count--add" />
+                        <ui:VisualElement name="characters-button-digit2" class="characters__button-container" style="margin-top: 0;">
+                            <ui:Button display-tooltip-when-elided="true" name="chars-digit2__remove" class="chars__button chars__button-count--remove" />
+                            <ui:Button display-tooltip-when-elided="true" name="chars-digit2__add" class="chars__button chars__button-count--add" />
                         </ui:VisualElement>
-                        <ui:VisualElement name="characters-button-digit3" class="characters__button-container">
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit3__remove" class="chars__button chars__button-count--remove" />
-                            <ui:Button text="・" display-tooltip-when-elided="true" name="chars-digit3__add" class="chars__button chars__button-count--add" />
+                        <ui:VisualElement name="characters-button-digit3" class="characters__button-container" style="margin-right: 2%; margin-top: 0;">
+                            <ui:Button display-tooltip-when-elided="true" name="chars-digit3__remove" class="chars__button chars__button-count--remove" />
+                            <ui:Button display-tooltip-when-elided="true" name="chars-digit3__add" class="chars__button chars__button-count--add" />
                         </ui:VisualElement>
                         <ui:Button text="+/-" display-tooltip-when-elided="true" name="characters-button-switch-mode" class="chars__button" style="flex-basis: auto; flex-grow: 0; flex-shrink: 1; width: 10%; height: 60%; min-width: 10%; min-height: 50%; display: none;" />
                     </ui:VisualElement>
